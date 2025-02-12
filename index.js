@@ -11,5 +11,7 @@ const Ising = require('./lib/Ising');
     let grid_dim = args[0];
     let model = new Ising({ grid_dim });
 
+    model.step();
+
     // TODO: Implement MCMC
 }()
