@@ -9,9 +9,10 @@ const Ising = require('./lib/Ising');
     }
 
     let grid_dim = args[0];
+    const T = 1;
 
     let N = grid_dim ** 2;
-    let model = new Ising({ grid_dim });
+    let model = new Ising({ grid_dim, T });
 
     model.warmup();
 
@@ -21,5 +22,5 @@ const Ising = require('./lib/Ising');
         data.push(model.run_sweep());
     }
 
-    console.log(data);
+    // console.log(data);
 }()
