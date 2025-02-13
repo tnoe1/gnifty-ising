@@ -4,7 +4,7 @@ An implementation of the 2D Lenz-Ising model. This implementation currently
 uses a simplified version of the Hamiltonian that assumes constant interaction 
 between neighbors and no external magnetic field.
 
-$$H(\bold{S})=-J\sum_{i,j}s_{i}s_{j}$$
+$$H(\mathbf{S})=-J\sum_{i,j}s_{i}s_{j}$$
 
 ### TODO:
 - [x] Implement state histogram streaming
