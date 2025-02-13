@@ -1,6 +1,6 @@
 const process = require('process');
 const Ising = require('./lib/Ising');
-const Histogram = require('./lib/Histogram');
+const StreamHistogram = require('./lib/StreamHistogram');
 
 !async function () {
     let args = process.argv.slice(2);
@@ -11,19 +11,26 @@ const Histogram = require('./lib/Histogram');
 
     let grid_dim = args[0];
     const T = 2;
+    const STEP_TIME = 0; // ms
 
     let N = grid_dim ** 2;
     let model = new Ising({ grid_dim, T });
 
     model.warmup();
 
-    let num_sweeps = 100;
+    let num_sweeps = 10000;
     let data = [];
-
-    const hist = new Histogram(data);
-
-    for (let i = 0; i < num_sweeps; i++) {
-        data.push(model.run_sweep());
-        await new Promise((res, rej) => setInterval(res, 100));
+    
+    const runSweeps = async function* (ctx) {
+        for (let i = 0; i < num_sweeps; i++) {
+            await new Promise((res, rej) => setInterval(res, STEP_TIME));
+            yield {
+                context: ctx,
+                data: model.run_sweep()
+            };
+        }
     }
+
+    const hist = new StreamHistogram(runSweeps);
+    hist.plot();
 }()
