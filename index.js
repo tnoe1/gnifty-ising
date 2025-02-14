@@ -44,4 +44,10 @@ const StreamHistogram = require('./lib/StreamHistogram');
 
         console.log(`${num_sweeps} sweeps on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - start) / 1000} seconds`);
     }
+
+    let theoretical_start = Date.now();
+    let theoretical_energies = model.compute_theoretical();
+    console.log(`Theoretical calulations on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - theoretical_start) / 1000} seconds to complete`);
+
+    console.log(theoretical_energies);
 }()
