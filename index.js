@@ -5,8 +5,8 @@ const StreamHistogram = require('./lib/StreamHistogram');
 !async function () {
     let args = process.argv.slice(2);
 
-    if (args.length > 2) {
-        throw new Error("Usage: node index.js <GRID-DIM>");
+    if (args.length < 1 || args.length > 2) {
+        throw new Error("Usage: node index.js <GRID-DIM> <VIS-FLAG>");
     }
 
     let grid_dim = args[0];
