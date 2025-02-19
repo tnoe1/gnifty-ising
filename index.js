@@ -20,8 +20,13 @@ const { ComparableStreamHistogram } = require('./lib/StreamHistogram');
 
     model.warmup();
 
-    let num_sweeps = 10000;
+    let num_sweeps = 1000;
     let data = [];
+
+    // console.log("B", model.get_color_indices("B"));
+    // console.log("R", model.get_color_indices("R"));
+    // console.log("G", model.get_color_indices("G"));
+    // console.log("Y", model.get_color_indices("Y"));
     
     if (visualize && grid_dim <= 3) {
         // let theoretical_start = Date.now();
