@@ -8,4 +8,6 @@ $$H(\mathbf{S})=-J\sum_{i,j}s_{i}s_{j}$$
 
 ### TODO:
 - [x] Implement state histogram streaming
-- [ ] Implement theoretical state histogram
+- [x] Implement theoretical state histogram
+- [x] Implement autocorrelation time sweep
+- [ ] Implement Wolff and Worm algorithms to reduce critical slowing down
