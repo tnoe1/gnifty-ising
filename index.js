@@ -1,5 +1,6 @@
 const process = require('process');
 const Ising = require('./lib/Ising');
+const Measurer = require('./lib/Measurer');
 const { ComparableStreamHistogram } = require('./lib/StreamHistogram');
 
 !async function () {
@@ -23,35 +24,32 @@ const { ComparableStreamHistogram } = require('./lib/StreamHistogram');
     let num_sweeps = 1000;
     let data = [];
 
-    // console.log("B", model.get_color_indices("B"));
-    // console.log("R", model.get_color_indices("R"));
-    // console.log("G", model.get_color_indices("G"));
-    // console.log("Y", model.get_color_indices("Y"));
+    await Measurer.plot_state_progression(grid_dim, 0.1, 5);
     
-    if (visualize && grid_dim <= 3) {
-        // let theoretical_start = Date.now();
-        let theoretical_distribution = model.compute_theoretical();
-        // console.log(`Theoretical calulations on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - theoretical_start) / 1000} seconds to complete`);
-        console.log(theoretical_distribution) 
+    // if (visualize && grid_dim <= 3) {
+    //     // let theoretical_start = Date.now();
+    //     let theoretical_distribution = model.compute_theoretical();
+    //     // console.log(`Theoretical calulations on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - theoretical_start) / 1000} seconds to complete`);
+    //     console.log(theoretical_distribution) 
 
-        const runSweeps = async function* (ctx) {
-            for (let i = 0; i < num_sweeps; i++) {
-                await new Promise((res, rej) => setInterval(res, STEP_TIME));
-                yield {
-                    context: ctx,
-                    data: model.run_sweep()
-                };
-            }
-        }
+    //     const runSweeps = async function* (ctx) {
+    //         for (let i = 0; i < num_sweeps; i++) {
+    //             await new Promise((res, rej) => setInterval(res, STEP_TIME));
+    //             yield {
+    //                 context: ctx,
+    //                 data: model.run_sweep()
+    //             };
+    //         }
+    //     }
 
-        const hist = new ComparableStreamHistogram(runSweeps, { static_data: theoretical_distribution });
-        hist.plot();
-    } else {
-        const start = Date.now();
-        for (let i = 0; i < num_sweeps; i++) {
-            data.push(model.run_sweep());
-        }
+    //     const hist = new ComparableStreamHistogram(runSweeps, { static_data: theoretical_distribution });
+    //     hist.plot();
+    // } else {
+    //     const start = Date.now();
+    //     for (let i = 0; i < num_sweeps; i++) {
+    //         data.push(model.run_sweep());
+    //     }
 
-        console.log(`${num_sweeps} sweeps on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - start) / 1000} seconds`);
-    }
+    //     console.log(`${num_sweeps} sweeps on a grid of size ${grid_dim}x${grid_dim} took ${(Date.now() - start) / 1000} seconds`);
+    // }
 }()
