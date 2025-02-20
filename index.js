@@ -24,7 +24,7 @@ const { ComparableStreamHistogram } = require('./lib/StreamHistogram');
     let num_sweeps = 1000;
     let data = [];
 
-    await Measurer.plot_state_progression(grid_dim, 0.1, 5);
+    await Measurer.plot_autocorrelation_time(grid_dim, 0.1, 10);
     
     // if (visualize && grid_dim <= 3) {
     //     // let theoretical_start = Date.now();
